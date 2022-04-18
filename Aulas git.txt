@@ -1,0 +1,235 @@
+Sessão 1: INTRODUÇÃO
+
+Tipos de versionamento
+
+controle de versão centralizado
+
+colocar nome 
+
+git config --global user.name "Nathan Castro"
+
+Ver qual nome foi gravado
+git config user.name
+
+colocar email 
+
+git config --global user.email  "nathanslc18@gmail.com"
+
+Ver qual emailfoi gravado
+git config user.email 
+
+
+
+Aliases
+Termo alias é sinonimo de atalho
+
+git config --global alias.hist 'log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
+
+Manual do GIT
+
+git <verb> --help
+
+dependendo do que vc digita ali no <verb>, vai direto pra página do GIT na web
+
+git --help
+ai aparece no GIT
+
+
+Sessão 2: INICIANDO COM GIT
+
+O repositório possui 3 áreas,
+
+"Área de Trabalho" <git add> vai para a "Área de staging" <git commit> vai "Repositório"
+
+Visualizar as alterações envolvidas em um det commit, exibi as alterações do último git
+
+Git show = mais completo que o GIT LOG, mostra autor,data, pasta, arquivos e o conteudo dos arquivos.	
+git log = mostra todos os commits, data e autor que foi feito.
+
+
+Git id = é o nome de um objeto GIT, usando hash
+
+
+
+Git objects
+
+git cat-file -t <hash do diretório raiz>  mostar o tipo de objeto
+
+git cat-file -p <hash do diretório raiz> mostra o conteúdo
+
+no Git conteúdo dos aquivos são armazenados em objetos chamados blobs
+
+Diretórios são equivalentes a uma árvore
+
+Cada commit mostra que tem um arvore e cada arvore, dependendo mostra que tem blobs(são os arquivos) e cada vez que cria um arquivo, é gerado uma nova arvore e as camadas vão ficando mais fundas
+
+
+
+
+
+o GIT CLONE já vem com o arquivo git init
+e já executa o git fetch
+
+
+Git status, mostra quantos commits foram feitos no stage para subir pelo GIT PUSH e mostra arquivos que não foram ADD .
+touch > cria um arquivo na pasta mas não escreve nada
+
+echo "msg" > [nomeDoArquivo] = cria um arquivo e já acrescenta alguma msg dentro do arquivo
+
+
+
+Quando criamos um novo arquivo, ele começa com o status UNTRACKED( estado de um arquivo não rastreado pelo git)
+Quando damos o GIT ADD . ele vai para o status STAGED.
+Quando damos GIT COMMIT agora o arquivo está sendo versionado pelo GIT, ele vai para o status UNMODIFIED
+Quando editamos ele vai para o status MODIFIED e dps é preciso dar o GIT ADD . para mudar o status
+
+
+
+Sessão3: REFERÊNCIAS NO GIT
+
+1- HEAD
+é uma referencia que aponta pra branch q ta atuando nesse momento(nesse caso é a master)
+
+2-CHECKOUT
+é utilizado principalmente para alternar entre versões, usamos para alternar de branch.
+é possível alternar para o último commit usando GIT CHECKOUT <BRANCH> ~N(onde é um número qlqr de commit)
+
+                 GIT CHECKOUT -b<NEW_BRANCH> cria uma nova branch e já alterna para ela mesma 
+
+3- CRIANDO BRANCH E BRANCHES DE RASTREAMENTO
+
+GIT BRANCH -A (-a lista todas as branches[locais e rastreamento])
+
+Quando vc dar o PUSH e aparece a msg  [git push --set-upstream origin<NomeDaBranch>] não existe uma branch de rastreamento.
+e por isso pede pra executar o comando  git push --set-upstream origin...
+
+
+4-OUTRAS FORMAS DE CRIAR UMA BRANCH
+
+git branch <nome da nova branch>, no entanto não entra nessa banch, teria que fazer CD <nomeDaBranch>
+
+
+Para criar uma nova branch a partir de uma branch especifica utilize o comando
+git branch -c <nome da branch específica> <nome da nova branch>
+
+5- RENOMEANDO UMA BRANCH
+
+git branch -m "banner"
+
+Caso a branch que o nome será alterado não seha a branch atual, execute: 
+GIT BRANCH -M "<nome_antigo>" "<nome_novo>"
+
+Pa mudar o nome da branch remotamente, tem que apagar a que já está lá
+      GIT PUSH ORIGIN --DELETE <NOMEDABRANCH> ou GIT PUSH ORIGIN :<nomeDaBranch>
+e dps subir a branch renomeada localmente
+
+
+6- Tags anotadas
+Tags smp vão se referenciar aquele commit q foi feito
+
+	GIT TAG -A "V1.0" -M "FIRST VERSION"	
+
+São 2 tipos de tags, ANOTADAS e LEVES
+
+7- Tag leve
+Usado para privado ou temporário
+
+GIT TAG <nome>
+
+para deletar
+GIT TAG -d <nome>
+
+8- Empurrando Tags para o repositório remoto
+O git push não envia tags, para adicionar tags e empurrar para o repositório remoto, temos q fazer
+
+GIT PUSH --TAGS
+
+9- Nota: Configuração para push de commits e tags simultaneamente 
+
+É possível incluir uma configuração no Git para que o comando git push faça o envio de commits e tags simultaneamente. Para isso, basta adicionar ao arquivo de configuração do Git a propriedade push.followTags com o valor true.
+
+Para adicionar a configuração a um repositório local específico, acesse o repositório e execute:
+
+git config --local push.followTags true
+
+Para adicionar a configuração a todos os repositórios do seu usuário corrente do sistema operacional execute:
+
+git config --global push.followTags true
+
+Para adicionar a configuração a todos os repositórios de todos os usuários do sistema operacional execute:
+
+git config --system push.followTags true
+
+
+
+ESTUDAR SOBRE TAGS
+
+
+
+
+Sessão 4: DESCARTANDO MUDANÇAS LOCAIS
+
+2- Descartando mudanças locais
+
+cat + [nomeDoArquivo] mostra o que ta dentro do arquivo
+
+para desfazer uma mudança no git depois de ter feito e salvo, usa-se 
+    GIT RESTORE [nomeDoArquivo]
+
+Quando criamos um arquivo e llogo dps damos o GIT RESTORE ele dá erro, pois o arquivo não é rastreado pelo GIT
+
+
+GIT CLEAN [nomeDoArquivo] -f apaga o arquivo criado mesmo sem commit.
+
+GIT CLEAN -f, esse comando apaga todos os arquivos não rastreavel
+
+GIT CLEAN -n, visualiza os arquivos que serão apagados
+
+
+3- Descartando mudanças no Stage
+
+Só funciona dps de ter dado o git add 
+
+GIT RESTORE --STAGED <file>
+
+Além de desfazer alterações, o comando restore também pode ser utilizado para restaurar versões anteriores em um arquivo.
+
+Para isso, você pode utilizar o seguinte comando:
+
+git restore --source <hash do commit> <nome do arquivo>
+
+
+4- Revert de commit
+
+GIT REVER HEAD --no-edit
+
+o parametro --no-edit fará com que o GIT não abra o editor de texto padrão	
+
+Ele volta com a mudança feita no arquivo
+
+
+
+5- Reset - SOFT
+
+o GIT RESET é uma ferramenta complexa e versátil para desfazer alterações
+
+Há 3 tipos de reset: soft, mixed e hard
+
+Quando não definimos parametro o GIT assume como padrão o MIXED
+
+GIT RESET --soft head~   o til não precisa do numero 1 pra dizer que é o 1, aparti daí que é priciso colocar a numeração que faz referencia a esse commit
+
+o Reset após ser feito, o arquivo vai para área de STAGED
+
+No SOFT as áreas de stage e área de trabalho não são alteradas
+
+6- Reset - MIXED
+
+Não é necessário qndo fizer o GIT RESET utilizar o MIXED, pq por padrão ele já usa o mixed.
+
+GIT RESET HEAD~
+
+Ao fazer o GIT RESET MIXED, o arquivo vai para a área local e não para o STAGE como é o SOFT
+
+
+7- Reset - HARD
