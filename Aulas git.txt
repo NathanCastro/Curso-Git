@@ -91,6 +91,7 @@ Sessão3: REFERÊNCIAS NO GIT
 é uma referencia que aponta pra branch q ta atuando nesse momento(nesse caso é a master)
 
 2-CHECKOUT
+O comando checkout imediatamente faz é alterar a referência HEAD
 é utilizado principalmente para alternar entre versões, usamos para alternar de branch.
 é possível alternar para o último commit usando GIT CHECKOUT <BRANCH> ~N(onde é um número qlqr de commit)
 
@@ -201,7 +202,7 @@ git restore --source <hash do commit> <nome do arquivo>
 
 4- Revert de commit
 
-GIT REVER HEAD --no-edit
+GIT REVERT HEAD --no-edit
 
 o parametro --no-edit fará com que o GIT não abra o editor de texto padrão	
 
@@ -233,3 +234,39 @@ Ao fazer o GIT RESET MIXED, o arquivo vai para a área local e não para o STAGE
 
 
 7- Reset - HARD
+
+O comando HARD ele limpa tanto a área de STAGE qnto a área LOCAL
+
+
+
+8-Reflog
+
+Serve para recuperar o histórico de projetos e recuperar quase tudo
+
+GIT REFLOG, ai pode pegar o HASH e dps fazer um git checkout <hash>
+
+
+9-Revert x Reset
+
+O comando REVERT gera um novo commit que desfaz o commit selecionado
+	para uma alteração que não deveria existir são gerados 2 commits no histórico
+	Para ter um hisórioc mais limpo, é melhor que os dois commits acima não pertençam ao mesmo histórico
+
+O comando RESET remove commits como se eles nunca tivessem existido no histórico
+
+	Torna o histórico mais limpo sem commits adicionais
+	Pode ser utilizado para remover os últimos commits de um determinado histórico
+	Não remova commits que outros contribuidores possam ter baseado o trabalho
+
+
+detached HEAD- A referencia HEAD apaonta diretamente par aum commit
+deletar uma branch" imediatamente faz Remove um rótulo de ramificação
+PROVA 
+
+Fui mal, acertei 9 de 15, tenho que revisar algumas coisas
+Fiz de novo e acertei 12 de 15
+
+
+Sessão 5: MERGES, DAG e CONFLITOS
+
+1- Merge
