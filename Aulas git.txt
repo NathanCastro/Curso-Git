@@ -1,4 +1,4 @@
-Sessão 1: INTRODUÇÃO
+ Sessão 1: INTRODUÇÃO
 
 Tipos de versionamento
 
@@ -117,13 +117,15 @@ git branch -c <nome da branch específica> <nome da nova branch>
 
 git branch -m "banner"
 
-Caso a branch que o nome será alterado não seha a branch atual, execute: 
+Caso a branch que o nome será alterado não seja a branch atual, execute: 
 GIT BRANCH -M "<nome_antigo>" "<nome_novo>"
 
 Pa mudar o nome da branch remotamente, tem que apagar a que já está lá
       GIT PUSH ORIGIN --DELETE <NOMEDABRANCH> ou GIT PUSH ORIGIN :<nomeDaBranch>
 e dps subir a branch renomeada localmente
 
+Deletar branch local:
+	git branch -d <branch>
 
 6- Tags anotadas
 Tags smp vão se referenciar aquele commit q foi feito
@@ -270,3 +272,8 @@ Fiz de novo e acertei 12 de 15
 Sessão 5: MERGES, DAG e CONFLITOS
 
 1- Merge
+
+*deu erro, ao fazer o merge, fiz o comando 
+git config --global core.editor 'code --wait' e logo dps fiz o git merge --abort e fiz novamente o MERGE, no entanto apareceu o VS code com uns dizeres do MERGE, tive q fechar
+
+Jà estou na quarta aula de MERGE e não to entendendo muito.
