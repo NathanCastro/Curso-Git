@@ -15,7 +15,7 @@ colocar email
 
 git config --global user.email  "nathanslc18@gmail.com"
 
-Ver qual emailfoi gravado
+Ver qual email foi gravado
 git config user.email 
 
 
@@ -179,7 +179,7 @@ cat + [nomeDoArquivo] mostra o que ta dentro do arquivo
 para desfazer uma mudança no git depois de ter feito e salvo, usa-se 
     GIT RESTORE [nomeDoArquivo]
 
-Quando criamos um arquivo e llogo dps damos o GIT RESTORE ele dá erro, pois o arquivo não é rastreado pelo GIT
+Quando criamos um arquivo e logo dps damos o GIT RESTORE ele dá erro, pois o arquivo não é rastreado pelo GIT
 
 
 GIT CLEAN [nomeDoArquivo] -f apaga o arquivo criado mesmo sem commit.
@@ -220,7 +220,7 @@ Há 3 tipos de reset: soft, mixed e hard
 
 Quando não definimos parametro o GIT assume como padrão o MIXED
 
-GIT RESET --soft head~   o til não precisa do numero 1 pra dizer que é o 1, aparti daí que é priciso colocar a numeração que faz referencia a esse commit
+GIT RESET --soft head~   o til não precisa do numero 1 pra dizer que é o 1, a partir daí que é priciso colocar a numeração que faz referencia a esse commit
 
 o Reset após ser feito, o arquivo vai para área de STAGED
 
@@ -252,7 +252,7 @@ GIT REFLOG, ai pode pegar o HASH e dps fazer um git checkout <hash>
 
 O comando REVERT gera um novo commit que desfaz o commit selecionado
 	para uma alteração que não deveria existir são gerados 2 commits no histórico
-	Para ter um hisórioc mais limpo, é melhor que os dois commits acima não pertençam ao mesmo histórico
+	Para ter um histórico mais limpo, é melhor que os dois commits acima não pertençam ao mesmo histórico
 
 O comando RESET remove commits como se eles nunca tivessem existido no histórico
 
@@ -277,3 +277,43 @@ Sessão 5: MERGES, DAG e CONFLITOS
 git config --global core.editor 'code --wait' e logo dps fiz o git merge --abort e fiz novamente o MERGE, no entanto apareceu o VS code com uns dizeres do MERGE, tive q fechar
 
 Jà estou na quarta aula de MERGE e não to entendendo muito.
+
+5 - Conflitos
+
+echo "mensagem" >> file(>> insere a msg no final do arquivo"
+
+[fiquei mto tempo sem mexer no curso e esqueci algumas coisas, mas em específico essa Seção 5, não entendi muito bem. Vi em partes.]
+
+
+
+Sessão 6: TABALHO COLABORATIVO
+
+1-Fetch
+geralmente quando sobem alguma modificação e damos um git fetch não vem as alterações na master remota, podemos fazer um git checkout origin/master, no entanto não é algo legal de se fazer. Podemos realizar o seguinte comando para trazer as alterações para a master local:
+
+Git Checkout Master
+Git merge --no-ff origin/master
+git hist
+
+
+2- Pull
+o git pull baixa as alterações do repositório remoto e mescla com sua área de trabalho
+
+3- Fecht x Pull
+
+O fetch será usado para baixar os git objects do repositório remoto sem afetar o código local.
+Serve para deixar atualizado, mas não atualiza local, o que permite vc trabalhar sem quebrar nada naquele momento.
+
+O Pull já traz todo o conteúdo remoto para o local, ele executa um git fetch seguido de um git merge origin/<current_branch>. Caso tenha algum conflito, vc deve resolver na hora, diferente do fetch que pode ser resolvido dps
+
+
+
+4- Bloqueio de push
+
+Quando estamos trabalhando no mesmo repositorio e no terminal 1 subimos mudanças e no terminal 2 quando subirmos a mudança teremos um bloqueio, pois no terminal 2 não demos um git pull e devido a isso, não atualizamos esse terminal. Precisamos dar um git pull, pegar as atualizações feitas no terminal 1 e baixar para o terminal 2. Só assim conseguimos dps dar um git push empurrando as modificações.
+
+Fetch - Baixa o conteudo remoto, mas só atualiza a branch d rastreamento pra apontar pro ultimo commit
+
+Pull - Realiza um fetch seguido por Merge
+
+Bloqueio do Push - O historico do repositorio local estava desatualizado, pois uma outra pessoa fez o commit e deu um git push e não foi baixado na branch com o git pull
